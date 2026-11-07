@@ -1,0 +1,101 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+  }
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-diwali {
+  font-family: 'Cinzel Decorative', 'Cinzel', serif;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+@keyframes goldShimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-gradient-text {
+  background: linear-gradient(
+    90deg,
+    #fef08a 0%,
+    #f59e0b 25%,
+    #fef9c3 50%,
+    #d97706 75%,
+    #fef08a 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 6s linear infinite;
+}
+
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.95;
+    filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.9));
+  }
+  25% {
+    transform: scale(1.08, 0.95) translate(-1px, -2px);
+    opacity: 1;
+    filter: drop-shadow(0 0 18px rgba(245, 158, 11, 1));
+  }
+  50% {
+    transform: scale(0.96, 1.05) translate(1px, -1px);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 14px rgba(252, 211, 77, 0.85));
+  }
+  75% {
+    transform: scale(1.04, 0.98) translate(-0.5px, -1.5px);
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.95));
+  }
+}
+
+.flame-animation {
+  animation: flameFlicker 1.8s ease-in-out infinite alternate;
+  transform-origin: bottom center;
+}
+
+@keyframes lanternSwayLeft {
+  0%, 100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes lanternSwayRight {
+  0%, 100% {
+    transform: scaleX(-1) rotate(-1.5deg);
+  }
+  50% {
+    transform: scaleX(-1) rotate(3deg);
+  }
+}
+
+.lantern-sway-left {
+  animation: lanternSwayLeft 5.5s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.lantern-sway-right {
+  animation: lanternSwayRight 6s ease-in-out infinite;
+  transform-origin: top center;
+}

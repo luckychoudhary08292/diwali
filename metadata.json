@@ -1,0 +1,6 @@
+{
+  "name": "AuraWish - Personalized Wishes & Greetings",
+  "description": "A minimalist, responsive interactive wishing web app with dynamic personalized messages, smooth animations, and dark mode.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
