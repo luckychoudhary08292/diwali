@@ -51,7 +51,9 @@ export const DiwaliFireworksCanvas: React.FC<DiwaliFireworksCanvasProps> = ({ bu
     img1.src = '/assets/aistudio/82c3485fbe6920add88b50f97eb8c82a-Photoroom_e2ccc1c2.png';
     const img2 = new Image();
     img2.src = '/assets/aistudio/acac7452624f9a7017f2591b04a97bab_8b6ac20a.png';
-    crackerImagesRef.current = [img1, img2];
+    const img3 = new Image();
+    img3.src = '/assets/aistudio/Diwali_Sky_Crackers_Png_PNG_Transparent_With_Clear_Background_ID_111375___TopPNG-removebg-preview_2dd30f25.png';
+    crackerImagesRef.current = [img1, img2, img3];
   }, []);
 
   const FIREWORK_COLORS = [

@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, RotateCcw } from 'lucide-react';
 import { DiwaliFireworksCanvas } from './components/DiwaliFireworksCanvas';
 import { DiwaliDecorOverlay } from './components/DiwaliDecorOverlay';
 import { DiwaliNameGateway } from './components/DiwaliNameGateway';
 import { DiwaliGiftBoxStage } from './components/DiwaliGiftBoxStage';
 import { DiwaliGrandWish } from './components/DiwaliGrandWish';
-import { DiyaSanctuary } from './components/pavilions/DiyaSanctuary';
-import { RangoliStudio } from './components/pavilions/RangoliStudio';
-import { MithaiThali } from './components/pavilions/MithaiThali';
 import { soundEngine } from './utils/audioChime';
 
 type AppStage = 'gateway' | 'giftbox' | 'main';
-type ActivePavilion = 'wish' | 'diyas' | 'rangoli' | 'sweets';
 
 export default function App() {
   const [stage, setStage] = useState<AppStage>('gateway');
-  const [activePavilion, setActivePavilion] = useState<ActivePavilion>('wish');
   const [recipientName, setRecipientName] = useState<string>('');
   const [senderName, setSenderName] = useState<string>('');
   const [burstTrigger, setBurstTrigger] = useState<number>(0);
@@ -54,14 +49,12 @@ export default function App() {
 
   const handleGiftBoxOpened = () => {
     setStage('main');
-    setActivePavilion('wish');
     setBurstTrigger((prev) => prev + 1);
   };
 
   const handleResetToGateway = () => {
     soundEngine.playSoftClick();
     setStage('gateway');
-    setActivePavilion('wish');
   };
 
   return (
@@ -93,6 +86,19 @@ export default function App() {
         {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
       </button>
 
+      {/* Floating Discreet New Wish / Back Button */}
+      {stage !== 'gateway' && (
+        <button
+          onClick={handleResetToGateway}
+          title="Create another wish"
+          className="fixed top-3 left-3 z-50 flex h-9 px-3 min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-amber-500/30 bg-slate-950/80 backdrop-blur-md text-amber-300 hover:bg-slate-900 transition-colors shadow-lg text-xs font-semibold cursor-pointer"
+          aria-label="Create another wish"
+        >
+          <RotateCcw className="h-3.5 w-3.5" />
+          <span>New Wish</span>
+        </button>
+      )}
+
       {/* Main Interactive Stage Container */}
       <main className="relative z-10 flex-1 flex flex-col justify-center px-4 py-6 sm:py-10 max-w-6xl mx-auto w-full">
         {stage === 'gateway' && (
@@ -113,86 +119,12 @@ export default function App() {
         )}
 
         {stage === 'main' && (
-          <div>
-            {/* Centered Pavilion Tabs Bar */}
-            <div className="flex items-center justify-center gap-1 mb-6 p-1 bg-slate-900/90 backdrop-blur-md border border-amber-500/30 rounded-2xl max-w-md mx-auto shadow-xl">
-              <button
-                onClick={() => {
-                  soundEngine.playSoftClick();
-                  setActivePavilion('wish');
-                }}
-                className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all ${
-                  activePavilion === 'wish'
-                    ? 'bg-amber-400 text-slate-950 font-bold shadow-md'
-                    : 'text-amber-200/80 hover:text-white'
-                }`}
-              >
-                Wish
-              </button>
-              <button
-                onClick={() => {
-                  soundEngine.playDiyaLight();
-                  setActivePavilion('diyas');
-                }}
-                className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all ${
-                  activePavilion === 'diyas'
-                    ? 'bg-amber-400 text-slate-950 font-bold shadow-md'
-                    : 'text-amber-200/80 hover:text-white'
-                }`}
-              >
-                Diyas
-              </button>
-              <button
-                onClick={() => {
-                  soundEngine.playCelebrationChime();
-                  setActivePavilion('rangoli');
-                }}
-                className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all ${
-                  activePavilion === 'rangoli'
-                    ? 'bg-amber-400 text-slate-950 font-bold shadow-md'
-                    : 'text-amber-200/80 hover:text-white'
-                }`}
-              >
-                Rangoli
-              </button>
-              <button
-                onClick={() => {
-                  soundEngine.playCelebrationChime();
-                  setActivePavilion('sweets');
-                }}
-                className={`flex-1 py-2 text-xs font-semibold rounded-xl transition-all ${
-                  activePavilion === 'sweets'
-                    ? 'bg-amber-400 text-slate-950 font-bold shadow-md'
-                    : 'text-amber-200/80 hover:text-white'
-                }`}
-              >
-                Mithai
-              </button>
-            </div>
-
-            {/* Active Pavilion Display */}
-            {activePavilion === 'wish' && (
-              <DiwaliGrandWish
-                recipientName={recipientName || 'Beloved Friend'}
-                senderName={senderName}
-                onExplorePavilion={(pavilionId) => {
-                  if (pavilionId === 'diyas' || pavilionId === 'rangoli' || pavilionId === 'sweets') {
-                    setActivePavilion(pavilionId);
-                  }
-                }}
-                onReset={handleResetToGateway}
-                onTriggerBurst={() => setBurstTrigger((p) => p + 1)}
-              />
-            )}
-
-            {activePavilion === 'diyas' && <DiyaSanctuary />}
-
-            {activePavilion === 'rangoli' && <RangoliStudio />}
-
-            {activePavilion === 'sweets' && (
-              <MithaiThali recipientName={recipientName || 'Beloved Friend'} />
-            )}
-          </div>
+          <DiwaliGrandWish
+            recipientName={recipientName || 'Beloved Friend'}
+            senderName={senderName}
+            onReset={handleResetToGateway}
+            onTriggerBurst={() => setBurstTrigger((p) => p + 1)}
+          />
         )}
       </main>
     </div>

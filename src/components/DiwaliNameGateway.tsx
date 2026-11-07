@@ -20,7 +20,7 @@ export const DiwaliNameGateway: React.FC<DiwaliNameGatewayProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!recipient.trim()) {
-      setError('Please enter your name or the name of the person you want to wish.');
+      setError('Please type your name to unseal the gift.');
       return;
     }
     setError('');
@@ -29,47 +29,46 @@ export const DiwaliNameGateway: React.FC<DiwaliNameGatewayProps> = ({
   };
 
   return (
-    <div className="relative min-h-[85vh] flex flex-col items-center justify-center px-4 py-8 text-center z-10">
-      {/* Sacred Kalash with Om & Marigolds */}
-      <div className="w-24 sm:w-32 md:w-36 mb-2 mx-auto drop-shadow-[0_10px_25px_rgba(245,158,11,0.5)] transition-transform hover:scale-105 animate-pulse duration-[5000ms]">
+    <div className="relative min-h-[82vh] flex flex-col items-center justify-center px-4 py-6 text-center z-10 max-w-xl mx-auto">
+      {/* Auspicious Sacred Kalash with Om & Marigolds */}
+      <div className="w-24 sm:w-28 md:w-32 mb-2 mx-auto drop-shadow-[0_12px_28px_rgba(245,158,11,0.55)] transition-transform hover:scale-105 duration-500">
         <img
           src="/assets/aistudio/image-Photoroom_2d9f8e4c.png"
-          alt="Sacred Diwali Kalash with Om and Marigolds"
-          className="w-full h-auto"
+          alt="Auspicious Diwali Kalash with Om"
+          className="w-full h-auto select-none"
         />
       </div>
 
-      {/* Sacred Shlok / Festival Kicker */}
-      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold mb-3 backdrop-blur-md">
-        <Sparkles className="h-3.5 w-3.5 text-amber-400" />
-        <span className="tracking-widest uppercase">शुभ दीपावली · Festival of Lights</span>
+      {/* Elegant Calligraphic "HAPPY Diwali" Logo */}
+      <div className="w-48 sm:w-56 md:w-64 mb-1 mx-auto select-none pointer-events-none">
+        <img
+          src="/assets/aistudio/8c163eb190f018d5a43d6b9d7c757ca5_ccc933dd.png"
+          alt="Happy Diwali Cursive Calligraphy Logo"
+          className="w-full h-auto filter brightness-0 invert sepia hue-rotate-[5deg] saturate-5 drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]"
+        />
       </div>
 
-      {/* Grand Title */}
-      <h1 className="font-diwali text-3xl sm:text-5xl lg:text-6xl font-black tracking-wide gold-gradient-text drop-shadow-[0_4px_24px_rgba(245,158,11,0.4)] leading-tight mb-3">
-        A Sacred Diwali Gift
-      </h1>
-
-      <p className="max-w-md mx-auto text-sm sm:text-base text-amber-100/90 leading-relaxed mb-6 font-light">
-        May the warmth of countless diyas bless your home. Please enter your name to unseal your personalized royal Diwali gift box.
+      {/* Subtitle Greeting */}
+      <p className="text-xs sm:text-sm text-amber-100/90 max-w-md mx-auto mb-6 font-light leading-relaxed">
+        Step into the festival of lights. Enter your name to receive your handcrafted 3D royal Diwali gift box and auspicious blessings.
       </p>
 
-      {/* Name Input Box Card */}
-      <div className="w-full max-w-md bg-slate-900/85 backdrop-blur-xl border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] relative overflow-hidden text-left">
-        {/* Subtle decorative glowing corner accents */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl pointer-events-none" />
+      {/* Input Card Container */}
+      <div className="w-full bg-slate-900/90 backdrop-blur-xl border border-amber-500/40 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.8)] relative overflow-hidden text-left">
+        {/* Soft background aura glows */}
+        <div className="absolute -top-10 -right-10 w-36 h-36 bg-amber-500/15 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-rose-500/15 rounded-full blur-2xl pointer-events-none" />
 
-        <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+        <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
           <div>
             <label
-              htmlFor="recipient-name-gateway"
-              className="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-2"
+              htmlFor="recipient-name-input"
+              className="block text-xs font-bold uppercase tracking-wider text-amber-300 mb-1.5"
             >
-              Type Your Name
+              Type Your Name *
             </label>
             <input
-              id="recipient-name-gateway"
+              id="recipient-name-input"
               type="text"
               autoFocus
               value={recipient}
@@ -77,25 +76,44 @@ export const DiwaliNameGateway: React.FC<DiwaliNameGatewayProps> = ({
                 setRecipient(e.target.value);
                 if (error) setError('');
               }}
-              placeholder="Type your name..."
+              placeholder="e.g., Aarav, Priya, Sharma Family..."
               maxLength={40}
-              className={`w-full h-13 px-4 rounded-xl bg-slate-950/80 border text-base font-medium text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400/50 transition-all ${
+              className={`w-full h-12 px-4 rounded-xl bg-slate-950/80 border text-base font-medium text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400/50 transition-all ${
                 error
                   ? 'border-rose-500'
                   : 'border-amber-500/30 focus:border-amber-400'
               }`}
             />
             {error && (
-              <p className="mt-1.5 text-xs text-rose-400 font-medium">
+              <p className="mt-1 text-xs text-rose-400 font-medium">
                 {error}
               </p>
             )}
           </div>
 
-          {/* Submit CTA */}
+          <div>
+            <label
+              htmlFor="sender-name-input"
+              className="block text-xs font-semibold tracking-wider text-slate-300 mb-1.5 flex items-center justify-between"
+            >
+              <span>From (Optional)</span>
+              <span className="text-[11px] text-slate-400 font-normal">Add sender name</span>
+            </label>
+            <input
+              id="sender-name-input"
+              type="text"
+              value={sender}
+              onChange={(e) => setSender(e.target.value)}
+              placeholder="e.g., Your Bestie, Rohan..."
+              maxLength={40}
+              className="w-full h-11 px-4 rounded-xl bg-slate-950/60 border border-slate-700/60 text-sm font-medium text-white placeholder:text-slate-500 focus:outline-none focus:border-amber-400/50 focus:ring-1 focus:ring-amber-400/30 transition-all"
+            />
+          </div>
+
+          {/* Primary Action Button */}
           <button
             type="submit"
-            className="w-full h-13 min-h-[48px] rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-[0_8px_25px_rgba(245,158,11,0.35)] active:scale-[0.98] transition-all cursor-pointer mt-2"
+            className="w-full h-13 min-h-[48px] rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-sm sm:text-base flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(245,158,11,0.35)] active:scale-[0.98] transition-all cursor-pointer pt-0.5 mt-2"
           >
             <Gift className="h-5 w-5 text-slate-950" />
             <span>Open Diwali Gift Box</span>
